@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Blog.Entity.Identity.ApplicationUser>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            Kullanıcı Listesi
+        </div>
+        <table class="table table-striped">
+            <tr>
+                <th>Adı</th>
+                <th>Soyadı</th>
+                <th>Email</th>
+                <th>Kullanıcı Adı</th>
+            </tr>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Name</td>
+                    <td>@user.Surname</td>
+                    <td>@user.Email</td>
+                    <td>@user.UserName</td>
+                    @*<td>@user.Roles</td>*@
+                </tr>
+            }
+
+        </table>
+
+    </div>
+</div>
+

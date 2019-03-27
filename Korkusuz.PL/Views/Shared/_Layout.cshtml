@@ -1,0 +1,208 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Furkan Korkusuz</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="icon" href="./img/core-img/web.png">
+    <link rel="stylesheet" href="/style.css">
+    <link href="~/css/style.css" rel="stylesheet" />
+
+
+
+    @using Microsoft.AspNet.Identity
+</head>
+<body>
+    <header class="header-area">
+        <!-- Main Header Start -->
+        <div class="main-header-area">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Classy Menu -->
+                    <nav class="classy-navbar justify-content-between" id="akameNav">
+                        <!-- Logo -->
+                        <a class="nav-brand" href="/Home">Furkan</a>
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+                        <!-- Menu -->
+                        <div class="classy-menu">
+                            <!-- Menu Close Button -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul id="nav">
+                                    <li><a href="/Home">Home</a></li>
+                                    <li><a href="/Home/Portofilo">Portfolio</a></li>
+                                    <li><a href="/Home/Servisler">Servislerimiz</a></li>
+                                    <li><a href="/Home/About">Hakkımızda</a></li>
+                                    <li><a href="/Home/Blog">Blog</a></li>
+                                    <li><a href="/Home/Contact">İletişim</a></li>
+                                    @if (Request.IsAuthenticated)
+                                    {
+                                        using (Html.BeginForm("LogOut", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+
+
+                                            @Html.ActionLink("Merhaba " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                                            <li> <a href="javascript:document.getElementById('logoutForm').submit()">Çıkış Yap</a></li>
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                            <li>
+                                                @Html.ActionLink("Kayıt Ol", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" }) </li>
+                                            <li>
+
+                                                @Html.ActionLink("Giriş Yap", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+                                            </li>
+                                            <li><img src="/img/core-img/Login.png" /></li>
+                                                
+                                           
+                                        
+                                    }
+                                    @{
+                                        if (Convert.ToInt32(Session["YetkiId"]) == 1)
+                                        {
+                                            <li> <a class="btn akame-btn " href="/Admin/Index">Admin Paneli</a></li>
+                                        }
+                                    }
+
+                                </ul>
+                                <!-- Sepet iconu -->
+                                @*<div class="cart-icon ml-5 mt-4 mt-lg-0">
+                                        <a href="#"><i class="icon_cart"></i></a>
+                                    </div>*@
+                                <!-- Book Icon -->
+
+
+                                @*<div class=" ml-5 mt-4 mt-lg-0 ml-md-4">
+                                    @if (Request.IsAuthenticated)
+                                    {
+                                        using (Html.BeginForm("LogOut", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+
+                                            <ul class="nav navbar-nav ">
+                                                <li>
+                                                    @Html.ActionLink("Merhaba " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                                                </li>
+                                                <li><a class="btn akame-btn active" href="javascript:document.getElementById('logoutForm').submit()">Çıkış Yap</a></li>
+                                            </ul>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <ul class="nav navbar-nav ">
+                                            <li>@Html.ActionLink("Kayıt Ol", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                                        </ul>
+                                        <ul class="nav navbar-nav ">
+                                            <li>@Html.ActionLink("Giriş Yap", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                                        </ul>
+                                        <img src="/img/core-img/Login.png" />
+                                    }
+                                    @{
+                                        if (Convert.ToInt32(Session["YetkiId"]) == 1)
+                                        {
+                                            <a class="btn akame-btn active" href="/Admin/Index">Admin Paneli</a>
+                                        }
+                                    }
+                                </div>*@
+
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container-fluid body-content">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            @RenderBody()
+        </div>
+
+    </div>
+    <!-- Footer Area Start -->
+    <footer class="footer-area mb-15 mt-15">
+        <div class="container">
+            <div class="row justify-content-between">
+                <!-- Single Footer Widget -->
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="single-footer-widget">
+                        <!-- Footer Logo -->
+
+                        <p>YAZI</p>
+                        <!-- Copywrite Text -->
+                        <div class="copywrite-text">
+                            <p>
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                Copyright &copy;
+                                <script>document.write(new Date().getFullYear());</script> Furkan Korkusuz | Tüm Hakları Saklıdır.
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                @*<!-- Single Footer Widget -->
+                    <div class="col-12 col-sm-6 col-md-4 col-xl-3">
+                        <div class="single-footer-widget mb-80">
+                            <!-- Widget Title -->
+                            <h4 class="widget-title">Opening times</h4>
+
+                            <!-- Open Times -->
+                            <div class="open-time">
+                                <p>Monday: Friday: 10.00 - 23.00</p>
+                                <p>Saturday: 10.00 - 19.00</p>
+                            </div>
+
+                            <!-- Social Info -->
+                            <div class="social-info">
+                                <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                                <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                                <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+                                <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>*@
+                <!-- Single Footer Widget -->
+                <div class="col-12 col-md-4 col-xl-3">
+                    <div class="single-footer-widget">
+                        <!-- Widget Title -->
+                        <h4 class="widget-title">İletişim</h4>
+                        <!-- Contact Address -->
+                        <div class="contact-address">
+                            <p>Tel: (+90) 554 817 39 48</p>
+                            <p>E-mail: furkankokusuz2@gmail.com</p>
+                            <p>Adres: Bahçelievler/İSTANBUL</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Area End -->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <!-- All JS Files -->
+    <!-- jQuery -->
+    <script src="/js/jquery.min.js"></script>
+    <!-- Popper -->
+    <script src="/js/popper.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="/Scripts/bootstrap.min.js"></script>
+    <!-- All Plugins -->
+    <script src="/js/akame.bundle.js"></script>
+    <!-- Active -->
+    <script src="/js/default-assets/active.js"></script>
+</body>
+</html>

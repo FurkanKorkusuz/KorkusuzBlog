@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Blog.Entity.Identity.ApplicationRole>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            Rol Listesi
+        </div>
+        <table class="table table-striped">
+            <tr>
+                <th>Rol Adı</th>
+                <th>Açıklama</th>
+            </tr>
+            @foreach (var rol in Model)
+            {
+                <tr>
+                    <td>@rol.Name</td>
+                    <td>@rol.Description</td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+</div>
+

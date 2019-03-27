@@ -1,0 +1,241 @@
+﻿@model Blog.Entity.Entity.Article
+
+@{
+    ViewBag.Title = "Article";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/js/jquery.min.js"></script>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+    <!-- /Preloader -->
+    <!-- Blog Details Area Start -->
+    <section class="akame-blog-details-area ">
+        <div class="container">
+
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <div class="post-content">
+                        <div class="post-meta">
+                            <a href="#" class="post-date"><i class="icon_clock_alt"></i> @Model.CreatedDate.ToShortDateString()</a>
+                            <a href="#" class="post-comments"><i class="icon_chat_alt"></i> @Model.Comments.Where(c => c.IsDeleted == false).Count()</a>
+                        </div>
+                        <h2 class="post-title">@Model.Title</h2>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row justify-content-center">
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="post-thumbnail mb-50">
+                            <img src="@Model.Picture" alt="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-2 col-md-2 col-lg-1">
+                    <!-- Post Share -->
+                    <div class="akame-post-share">
+                        <a href="#" data-toggle="tooltip" data-placement="left" title="Facebook" class="facebook"><i class="fa fa-facebook"></i></a>
+                        <a href="#" data-toggle="tooltip" data-placement="left" title="Twitter" class="twitter"><i class="fa fa-twitter"></i></a>
+                        <a href="#" data-toggle="tooltip" data-placement="left" title="Google Plus" class="google-plus"><i class="fa fa-google-plus"></i></a>
+                        <a href="#" data-toggle="tooltip" data-placement="left" title="Instagram" class="instagram"><i class="fa fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-10 col-md-10 col-lg-9">
+                    <div class="blog-details-text">
+                        <p>@Html.Raw(Model.Content)</p>
+
+                        <!-- Alıntı //////////// Tırnak içine alma vs -->
+                        <blockquote class="akame-blockquote">
+                            <div class="text">
+                                <h4></h4>
+                            </div>
+                        </blockquote>
+                        <p></p>
+                        <ul>
+                            <li><span><i class="fa fa-circle" aria-hidden="true"></i> </span> </li>
+                        </ul>
+                        <p> </p>
+                    </div>
+
+                    <!-- Post Author Area -->
+                    <div class="post-author-area d-flex align-items-center justify-content-between">
+                        <!-- Author Meta -->
+                        <div class="author-meta d-flex align-items-center">
+                            <div class="author-avatar">
+                                <img src="/img/bg-img/43.jpg" alt="">
+                            </div>
+                            <div class="author-text">
+                                <p>Gusest Writer</p>
+                                <h5>John Smith</h5>
+                            </div>
+                        </div>
+
+                        <!-- Author Social Info -->
+                        <div class="author-social-info">
+                            <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                            <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                            <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Leave A Reply -->
+
+
+                    @if (Session["UserId"] != null)
+                    {
+                        <div class="akame-contact-form mt-50">
+                            <h4 class="mb-5">Yeni Yorum:</h4>
+                            <form action="#" method="post">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <textarea name="message" id="yorum" typeof="text" class="form-control mb-30"></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" id="gonder" class="btn akame-btn btn-3 mt-15">Yorum Yap</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    }
+                    else
+                    {
+                        <h2>Yorum yapabilmek için <a href="/Account/Login"> giriş</a>yapmalısınız.</h2>
+                    }
+
+                    @foreach (var item in Model.Comments.Where(c => c.IsDeleted == false).ToList())
+                    {
+                        <div class="media">
+                            <div class="well">
+                                <a class="pull-left" href="#">
+                                    <img width="50" class="img-circle" alt="@item.User.Name  @item.User.Surname" />
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">
+                                        @item.User.UserName
+                                        <small>@item.CreatedDate</small>
+                                    </h4>
+
+                                    @item.Content @if (Convert.ToString(Session["UserId"]) == item.UserId)
+                                    {
+                                        <a class="btn btn-danger" href="/Home/DeleteComment/@item.Id">Sil</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+
+                    <script type="text/javascript">
+                        $(document).ready(function (){
+                            $("#gonder").click(function (){
+                            var yorumunuz = $("#yorum").val();
+                            $.ajax({
+                                url: '/Home/Yorum/',
+                                data: { yorum:yorumunuz, makaleId:@Model.Id },
+                                type: 'POST',
+                                dataType: 'json',
+                                success: function (data) {
+                                    alert("Yorum Gönderildi" + yorumunuz);}
+                            });
+                        });
+                        })
+
+                    </script>
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            $.ajax({
+                                url: '/Home/OkunmaArttır',
+                                data: { id:@Model.Id},
+                                type: 'POST',
+                            });
+                        })
+                    </script>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Details Area End -->
+    <!-- Related News Area Start -->
+    <section class="akame-blog-area bg-gray section-padding-80-0 clearfix">
+        <div class="container">
+            <div class="row">
+                <!-- Section Heading -->
+                <div class="col-12">
+                    <div class="section-heading text-center">
+                        <h2>Latest News</h2>
+                        <p>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <!-- Single Post Area -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-post-area mb-80">
+                        <div class="post-thumbnail">
+                            <a href="/single-blog.html"><img src="/img/bg-img/1.jpg" alt=""></a>
+                        </div>
+                        <div class="post-content">
+                            <a href="#" class="post-title">Nina Dobrev Got a Major Haircut and Doesn't Look Like Nina Dobrev.</a>
+                            <div class="post-meta">
+                                <a href="#" class="post-date"><i class="icon_clock_alt"></i> September 27, 2018</a>
+                                <a href="#" class="post-comments"><i class="icon_chat_alt"></i> 10</a>
+                            </div>
+                            <p>Most people recognize the CFDA Awards for its slew of perfect gowns and skin-tight.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Post Area -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-post-area mb-80">
+                        <div class="post-thumbnail">
+                            <a href="/single-blog.html"><img src="/img/bg-img/2.jpg" alt=""></a>
+                        </div>
+                        <div class="post-content">
+                            <a href="#" class="post-title">Finally: How to Make Your Agressively Straight Hair Hold a Curl</a>
+                            <div class="post-meta">
+                                <a href="#" class="post-date"><i class="icon_clock_alt"></i> September 27, 2018</a>
+                                <a href="#" class="post-comments"><i class="icon_chat_alt"></i> 10</a>
+                            </div>
+                            <p>So I sought out an actual professional, i.e. celeb hairstylist Justine Marjan.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Post Area -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-post-area mb-80">
+                        <div class="post-thumbnail">
+                            <a href="/single-blog.html"><img src="/img/bg-img/3.jpg" alt=""></a>
+                        </div>
+                        <div class="post-content">
+                            <a href="#" class="post-title">Yes, Emilia Clarke Just Cut Off All Her Hair Into a Tiny Bob</a>
+                            <div class="post-meta">
+                                <a href="#" class="post-date"><i class="icon_clock_alt"></i> September 27, 2018</a>
+                                <a href="#" class="post-comments"><i class="icon_chat_alt"></i> 10</a>
+                            </div>
+                            <p>Last night, Clarke appeared on Late Night with Seth Meyers, wearing a charcoal blazer.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- Related News Area End -->
+
+
+</body>
+
