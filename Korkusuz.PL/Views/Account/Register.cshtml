@@ -23,7 +23,7 @@
         <div class="form-group akame-contact-form border-0 p-0">
             @Html.LabelFor(model => model.Surname, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control", @placeholder = "Soydınız" } })
                 @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
             </div>
         </div>

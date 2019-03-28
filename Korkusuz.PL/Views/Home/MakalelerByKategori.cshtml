@@ -1,51 +1,113 @@
-﻿@model IEnumerable<Blog.Entity.Entity.Category>
+﻿
 
+
+@model IEnumerable<Blog.Entity.Entity.Article>
 @{
-    ViewBag.Title = "MakalelerByKategori";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+    <!-- /Preloader -->
 
-<h2>MakalelerByKategori</h2>
+    <!-- Breadcrumb Area Start -->
+    <div>
+        <div class="col-lg-3 col-md-3 col-sm-3 hidden-xs">
+            @{
+                Html.RenderAction("KategoriPartial", "Home");
+            }
+        </div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsDeleted)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+            <section class="breadcrumb-area ">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="breadcrumb-content">
+                                <h2>Blog</h2>
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="/Home"><i class="icon_house_alt"></i> Home</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Blog</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Breadcrumb Area End -->
+            <!-- News Area Start -->
+            <section class="akame-news-area section-padding-0-80">
+                <div class="container">
 
-</table>
+
+                    <div class="row mx-sm-n4 akame-blog-masonary">
+                        @foreach (var item in Model)
+                        {
+                            <!-- Single Blog Item -->
+                            <div class="col-12 col-sm-6 col-lg-4 px-4 akame-blog-masonary-item mb-50 wow fadeInUp" data-wow-delay="200ms">
+                                <!-- Single Post Area -->
+                                <div class="single-post-area">
+                                    <div class="post-thumbnail">
+                                        <a href="/single-blog.html"><img src="@item.Picture" alt=""></a>
+                                    </div>
+                                    <div class="post-content">
+                                        <a href="#" class="post-title"> @item.Title </a>
+                                        <div class="post-meta">
+                                            <a href="#" class="post-date"><i class="icon_clock_alt"></i> &nbsp; @item.CreatedDate.ToShortDateString()</a>
+                                            <a href="#" class="post-comments"><i class="icon_chat_alt"> yorum?</i> 10</a>
+                                        </div>
+                                        <p>@item.Summary</p>
+                                    </div>
+                                </div>
+                                <footer class="clearfix">
+                                    <ul class="links pull-left">
+                                        <li><i @*class="fa fa-comment-o pr-5"*@></i> <a href="#">@item.Comments.Where(c => c.IsDeleted == false).Count() yorum</a> |</li>
+                                        <li><i @*class="fa fa-tags pr-5"*@></i> <a href="#">etiket @item.Tags.Count</a></li>
+                                    </ul>
+                                    @*<a class="pull-right link" href="blog-post.html"><span>Haber detayı</span></a>*@
+                                    <div class="row">
+                                        <div class="col-4 text-center">
+                                            <a href="/Home/Article/@item.Id" class="btn akame-btn active mt-30">Devamı...</a>
+                                        </div>
+                                    </div>
+                                </footer>
+                            </div>
+                        }
+
+                    </div>
+                   
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </div>
+
+
+    <!-- News Area End -->
+    <!-- Border -->
+    <div class="container">
+        <div class="border-top"></div>
+    </div>
+
+
+    @*<!-- All JS Files -->
+        <!-- jQuery -->
+        <script src="/js/jquery.min.js"></script>
+        <!-- Popper -->
+        <script src="/js/popper.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="/js/bootstrap.min.js"></script>
+        <!-- All Plugins -->
+        <script src="/js/akame.bundle.js"></script>
+        <!-- Active -->
+        <script src="/js/default-assets/active.js"></script>*@
+
+</body>

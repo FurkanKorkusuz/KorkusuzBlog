@@ -776,10 +776,10 @@
     <Content Include="Views\Home\Article.cshtml" />
     <Content Include="Views\Shared\_GridPager.cshtml" />
     <Content Include="Views\Shared\_Grid.cshtml" />
-    <Content Include="Views\Home\MakalelerByKategori.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\tinymce_full_compressed.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\tinymce_full.cshtml" />
     <Content Include="Views\TinyMCESample\Index.cshtml" />
+    <Content Include="Views\Home\MakalelerByKategori.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -14,66 +14,67 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>Makale Düzenle</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
+<div class="form-horizontal">
+    <h4>Makale Düzenle</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
 
-        <div class="form-group">
-            @Html.EditorFor(model => model.CategoryId, "CategoryId", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("CategoryId", new SelectList(ViewBag.Kategori, "Id", "Name"), new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Summary, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Summary, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Summary, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group" ValidateRequestMode=”Disabled”>
-            @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        @*<div class="form-group">
-                @Html.Label("Mevcut Foto", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <img width="75" src="@Model.Picture" alt="Alternate Text" />
-                    @Html.ValidationMessageFor(model => model.Picture, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Picture, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="file" name="Foto" id="Foto" accept=".jpg, .png, .JPEG, .jpeg" class="form-control" />
-                @Html.ValidationMessageFor(model => model.Picture, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Kaydet" class="btn btn-default" />
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.CategoryId, "CategoryId", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("CategoryId", new SelectList(ViewBag.Kategori, "Id", "Name"), new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
         </div>
     </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Summary, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Summary, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Summary, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group" ValidateRequestMode=”Disabled”>
+        @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @*<div class="form-group">
+            @Html.Label("Mevcut Foto", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <img width="75" src="@Model.Picture" alt="Alternate Text" />
+                @Html.ValidationMessageFor(model => model.Picture, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Picture, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="file" name="Foto" id="Foto" accept=".jpg, .png, .JPEG, .jpeg" class="form-control" />
+            @Html.ValidationMessageFor(model => model.Picture, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Kaydet" class="btn btn-info" />
+        </div>
+    </div>
+</div>
 }
 
 <div>

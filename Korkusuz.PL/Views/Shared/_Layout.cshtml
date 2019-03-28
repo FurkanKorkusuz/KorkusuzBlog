@@ -50,7 +50,7 @@
                                             @Html.AntiForgeryToken()
 
 
-                                            @Html.ActionLink("Merhaba " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                                            @Html.ActionLink(" Merhaba " + User.Identity.GetUserName() + "", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
                                             <li> <a href="javascript:document.getElementById('logoutForm').submit()">Çıkış Yap</a></li>
 
                                         }
@@ -76,46 +76,7 @@
                                     }
 
                                 </ul>
-                                <!-- Sepet iconu -->
-                                @*<div class="cart-icon ml-5 mt-4 mt-lg-0">
-                                        <a href="#"><i class="icon_cart"></i></a>
-                                    </div>*@
-                                <!-- Book Icon -->
-
-
-                                @*<div class=" ml-5 mt-4 mt-lg-0 ml-md-4">
-                                    @if (Request.IsAuthenticated)
-                                    {
-                                        using (Html.BeginForm("LogOut", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-                                        {
-                                            @Html.AntiForgeryToken()
-
-                                            <ul class="nav navbar-nav ">
-                                                <li>
-                                                    @Html.ActionLink("Merhaba " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-                                                </li>
-                                                <li><a class="btn akame-btn active" href="javascript:document.getElementById('logoutForm').submit()">Çıkış Yap</a></li>
-                                            </ul>
-                                        }
-                                    }
-                                    else
-                                    {
-                                        <ul class="nav navbar-nav ">
-                                            <li>@Html.ActionLink("Kayıt Ol", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-                                        </ul>
-                                        <ul class="nav navbar-nav ">
-                                            <li>@Html.ActionLink("Giriş Yap", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-                                        </ul>
-                                        <img src="/img/core-img/Login.png" />
-                                    }
-                                    @{
-                                        if (Convert.ToInt32(Session["YetkiId"]) == 1)
-                                        {
-                                            <a class="btn akame-btn active" href="/Admin/Index">Admin Paneli</a>
-                                        }
-                                    }
-                                </div>*@
-
+                               
                             </div>
                             <!-- Nav End -->
                         </div>

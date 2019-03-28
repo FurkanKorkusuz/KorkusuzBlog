@@ -27,17 +27,21 @@ namespace Korkusuz.PL.Controllers
    
         public ActionResult Blog(int Page=1)
         {
-            var makale = ent.Articles.Where(m=>m.IsDeleted==false).OrderBy(m=>m.OkunmaSayisi).ToPagedList(Page,3);
+            var makale = ent.Articles.Where(m=>m.IsDeleted==false).OrderBy(m=>m.OkunmaSayisi).ToPagedList(Page,6);
             return View(makale);
         }
         public ActionResult KategoriPartial()
         {
-            return View(ent.Categories.ToList());
+            return View(ent.Categories.Where(c => c.IsDeleted==false).ToList());
         }
         public ActionResult MakalelerByKategori(int? Id)
         {
-            var makaleler = ent.Articles.Where(m => m.CategoryId == Id && m.IsDeleted == false).ToList();
-            return View(makaleler); 
+            if (Id == null)
+            {
+                Response.Redirect("/Home/Blog");
+            }
+            var makale = ent.Articles.Where(m => m.CategoryId == Id && m.IsDeleted == false).ToList();
+            return View(makale); 
         }
         public ActionResult MakalelerByEtiket(int? etiketId)
         {

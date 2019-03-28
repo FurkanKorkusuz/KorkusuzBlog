@@ -109,7 +109,7 @@
                     }
                     else
                     {
-                        <h2>Yorum yapabilmek için <a href="/Account/Login"> giriş</a>yapmalısınız.</h2>
+                        <h2>Yorum yapabilmek için <a href="/Account/Login" style="color:blue"> GİRİŞ </a> yapmalısınız.</h2>
                     }
 
                     @foreach (var item in Model.Comments.Where(c => c.IsDeleted == false).ToList())
@@ -117,7 +117,7 @@
                         <div class="media">
                             <div class="well">
                                 <a class="pull-left" href="#">
-                                    <img width="50" class="img-circle" alt="@item.User.Name  @item.User.Surname" />
+                                      @item.User.Name  @item.User.Surname
                                 </a>
                                 <div class="media-body">
                                     <h4 class="media-heading">
